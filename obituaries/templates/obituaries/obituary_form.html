@@ -1,0 +1,67 @@
+{% extends 'obituaries/base.html' %}
+
+{% block title %}Submit Obituary{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 class="mb-4">Submit Obituary</h2>
+        <form method="post" id="obituaryForm" class="needs-validation" novalidate>
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+                <div class="invalid-feedback">Please provide the name.</div>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="date_of_birth" class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required>
+                    <div class="invalid-feedback">Please provide the date of birth.</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="date_of_death" class="form-label">Date of Death</label>
+                    <input type="date" class="form-control" id="date_of_death" name="date_of_death" required>
+                    <div class="invalid-feedback">Please provide the date of death.</div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+                <div class="invalid-feedback">Please provide the obituary content.</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="author" class="form-label">Author</label>
+                <input type="text" class="form-control" id="author" name="author" required>
+                <div class="invalid-feedback">Please provide the author name.</div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+// Form validation
+(function () {
+    'use strict'
+    
+    const form = document.getElementById('obituaryForm')
+    
+    form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+        
+        form.classList.add('was-validated')
+    }, false)
+})()
+</script>
+{% endblock %} 
+{% endblock %}
